@@ -23,7 +23,7 @@ express.use(require("./backend/structure/lightswitch.js"));
 express.use(require("./backend/structure/affiliate.js"));
 express.use(require("./backend/matchmaker/matchmaking.js"));
 express.use(require("./backend/structure/cloudstorage.js"));
-express.use(require("./backend/structure/mcp.js"));
+express.use(require("./backend/mcp/mcp.js"));
 
 const port = process.env.PORT || 3551;
 express.listen(port, () => {

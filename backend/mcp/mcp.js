@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const iniparser = require("ini");
 const config = iniparser.parse(fs.readFileSync(path.join(__dirname, "..", "Config", "config.ini")).toString());
-const functions = require("./functions.js");
+const functions = require("../structure/functions.js");
 const catalog = functions.getItemShop();
 
 express.use((req, res, next) => {
@@ -14,7 +14,7 @@ express.use((req, res, next) => {
         });
     }
 
-    fs.readdirSync("./profiles").forEach((file) => {
+    fs.readdirSync("./profiles.js").forEach((file) => {
         if (file.endsWith(".json")) {
             const memory = functions.GetVersionInfo(req);
 
