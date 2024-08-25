@@ -1,2 +1,2 @@
-bun run backend/index.js
+node index.js
 pause
