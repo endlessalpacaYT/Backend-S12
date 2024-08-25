@@ -1,0 +1,36 @@
+{
+    "_id": "",
+    "created": "",
+    "updated": "",
+    "rvn": 1,
+    "wipeNumber": 1,
+    "accountId": "",
+    "profileId": "metadata",
+    "version": "no_version", 
+    "items": {
+        "Outpost:outpostcore_pve_03": { 
+          "templateId": "Outpost:outpostcore_pve_03",
+          "attributes": {
+            "cloud_save_info": {
+              "saveCount": 319,
+              "savedRecords": [
+                {
+                  "recordIndex": 0,
+                  "archiveNumber": 1,
+                  "recordFilename": "eb192023-7db8-4bc0-b3e4-bf060c7baf87_r0_a1.sav"
+                }
+              ]
+            },
+             "level": 10
+          }
+          
+        }
+      },
+    "stats": {
+        "attributes": {
+            "inventory_limit_bonus": 0
+        }
+    },
+    "commandRevision": 0
+    
+}

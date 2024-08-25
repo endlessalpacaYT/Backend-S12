@@ -1,0 +1,306 @@
+{
+    "_id": "",
+    "created": "",
+    "updated": "",
+    "rvn": 1,
+    "wipeNumber": 1,
+    "accountId": "",
+    "profileId": "athena",
+    "version": "no_version",
+    "items": {
+      "athena-loadout": {
+        "templateId": "CosmeticLocker:cosmeticlocker_athena",
+        "attributes": {
+          "locker_slots_data": {
+            "slots": {
+              "MusicPack": {
+                "items": [
+                  ""
+                ]
+              },
+              "Character": {
+                "items": [
+                  ""
+                ],
+                "activeVariants": [
+                  null
+                ]
+              },
+              "Backpack": {
+                "items": [
+                  ""
+                ],
+                "activeVariants": [
+                  null
+                ]
+              },
+              "SkyDiveContrail": {
+                "items": [
+                  ""
+                ],
+                "activeVariants": [
+                  null
+                ]
+              },
+              "Dance": {
+                "items": [
+                  "AthenaDance:eid_dancemoves",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              },
+              "LoadingScreen": {
+                "items": [
+                  ""
+                ]
+              },
+              "Pickaxe": {
+                "items": [
+                  "AthenaPickaxe:DefaultPickaxe"
+                ],
+                "activeVariants": [
+                  null
+                ]
+              },
+              "Glider": {
+                "items": [
+                  "AthenaGlider:DefaultGlider"
+                ],
+                "activeVariants": [
+                  null
+                ]
+              },
+              "ItemWrap": {
+                "items": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "activeVariants": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ]
+              }
+            }
+          },
+          "use_count": 0,
+          "banner_icon_template": "StandardBanner1",
+          "banner_color_template": "DefaultColor1",
+          "locker_name": "athenaServer",
+          "item_seen": false,
+          "favorite": false
+        },
+        "quantity": 1
+      },
+      "AthenaCharacter:CID_001_Athena_Commando_F_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_001_Athena_Commando_F_Default"
+      },
+      "AthenaCharacter:CID_002_Athena_Commando_F_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_002_Athena_Commando_F_Default"
+      },
+      "AthenaCharacter:CID_003_Athena_Commando_F_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_003_Athena_Commando_F_Default"
+      },
+      "AthenaCharacter:CID_004_Athena_Commando_F_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_004_Athena_Commando_F_Default"
+      },
+      "AthenaCharacter:CID_005_Athena_Commando_M_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_005_Athena_Commando_M_Default"
+      },
+      "AthenaCharacter:CID_006_Athena_Commando_M_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_006_Athena_Commando_M_Default"
+      },
+      "AthenaCharacter:CID_007_Athena_Commando_M_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_007_Athena_Commando_M_Default"
+      },
+      "AthenaCharacter:CID_008_Athena_Commando_M_Default": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaCharacter:CID_008_Athena_Commando_M_Default"
+      },
+      "AthenaPickaxe:DefaultPickaxe": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaPickaxe:DefaultPickaxe"
+      },
+      "AthenaGlider:DefaultGlider": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaGlider:DefaultGlider"
+      },
+      "AthenaDance:EID_DanceMoves": {
+        "attributes": {
+          "favorite": false,
+          "item_seen": true,
+          "level": 0,
+          "max_level_bonus": 0,
+          "rnd_sel_cnt": 0,
+          "variants": [],
+          "xp": 0
+        },
+        "templateId": "AthenaDance:EID_DanceMoves"
+      }
+    },
+    "stats": {
+      "attributes": {
+        "past_seasons": [],
+        "season_match_boost": 0,
+        "loadouts": [
+          "athena-loadout"
+        ],
+        "favorite_victorypose": "",
+        "mfa_reward_claimed": true,
+        "quest_manager": {
+          "dailyLoginInterval": "0001-01-01T00:00:00.000Z",
+          "dailyQuestRerolls": 1
+        },
+        "book_level": 1,
+        "season_num": 0,
+        "favorite_consumableemote": "",
+        "banner_color": "DefaultColor1",
+        "favorite_callingcard": "",
+        "favorite_character": "",
+        "favorite_spray": [],
+        "book_xp": 0,
+        "party_assist_quest": "",
+        "pinned_quest": "",
+        "purchased_bp_offers": [],
+        "favorite_loadingscreen": "",
+        "book_purchased": true,
+        "lifetime_wins": 0,
+        "favorite_hat": "",
+        "level": 1,
+        "favorite_battlebus": "",
+        "favorite_mapmarker": "",
+        "favorite_vehicledeco": "",
+        "accountLevel": 1,
+        "favorite_backpack": "",
+        "favorite_dance": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "inventory_limit_bonus": 0,
+        "last_applied_loadout": "",
+        "favorite_skydivecontrail": "",
+        "favorite_pickaxe": "AthenaPickaxe:DefaultPickaxe",
+        "favorite_glider": "AthenaGlider:DefaultGlider",
+        "daily_rewards": {},
+        "xp": 0,
+        "season_friend_match_boost": 0,
+        "active_loadout_index": 0,
+        "favorite_musicpack": "",
+        "banner_icon": "StandardBanner1",
+        "favorite_itemwraps": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "commandRevision": 0
+  }

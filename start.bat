@@ -1,3 +1,2 @@
-:start
-node index.js
-goto start
+bun run backend/index.js
+pause
