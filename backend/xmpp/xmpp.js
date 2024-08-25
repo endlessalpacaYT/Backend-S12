@@ -2,8 +2,8 @@ const WebSocket = require("ws").Server;
 const XMLBuilder = require("xmlbuilder");
 const XMLParser = require("xml-parser");
 
-const functions = require("./../structure/functions.js");
-const matchmaker = require("./matchmaker.js");
+const functions = require("../structure/functions.js");
+const matchmaker = require("../matchmaker/matchmaker.js");
 
 const port = 80;
 

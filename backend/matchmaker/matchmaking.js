@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const iniparser = require("ini");
 const config = iniparser.parse(fs.readFileSync(path.join(__dirname, "..", "Config", "config.ini")).toString());
-const functions = require("./functions.js");
+const functions = require("../structure/functions.js");
 
 express.get("/fortnite/api/matchmaking/session/findPlayer/*", async (req, res) => {
     res.status(200);

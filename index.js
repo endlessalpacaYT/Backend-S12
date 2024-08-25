@@ -9,27 +9,27 @@ express.use(Express.urlencoded({ extended: true }));
 express.use(Express.static('public'));
 express.use(cookieParser());
 
-express.use(require("./structure/party.js"));
-express.use(require("./structure/discovery.js"))
-express.use(require("./structure/privacy.js"));
-express.use(require("./structure/timeline.js"));
-express.use(require("./structure/user.js"));
-express.use(require("./structure/contentpages.js"));
-express.use(require("./structure/friends.js"));
-express.use(require("./structure/main.js"));
-express.use(require("./structure/storefront.js"));
-express.use(require("./structure/version.js"));
-express.use(require("./structure/lightswitch.js"));
-express.use(require("./structure/affiliate.js"));
-express.use(require("./structure/matchmaking.js"));
-express.use(require("./structure/cloudstorage.js"));
-express.use(require("./structure/mcp.js"));
+express.use(require("./backend/structure/party.js"));
+express.use(require("./backend/structure/discovery.js"))
+express.use(require("./backend/structure/privacy.js"));
+express.use(require("./backend/structure/timeline.js"));
+express.use(require("./backend/structure/user.js"));
+express.use(require("./backend/structure/contentpages.js"));
+express.use(require("./backend/structure/friends.js"));
+express.use(require("./backend/structure/main.js"));
+express.use(require("./backend/structure/storefront.js"));
+express.use(require("./backend/structure/version.js"));
+express.use(require("./backend/structure/lightswitch.js"));
+express.use(require("./backend/structure/affiliate.js"));
+express.use(require("./backend/matchmaker/matchmaking.js"));
+express.use(require("./backend/structure/cloudstorage.js"));
+express.use(require("./backend/structure/mcp.js"));
 
 const port = process.env.PORT || 3551;
 express.listen(port, () => {
     console.log("LawinServer started listening on port", port);
 
-    require("./structure/xmpp.js");
+    require("./backend/xmpp/xmpp.js");
 }).on("error", (err) => {
     if (err.code == "EADDRINUSE") console.log(`\x1b[31mERROR\x1b[0m: Port ${port} is already in use!`);
     else throw err;

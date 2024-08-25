@@ -1,0 +1,9 @@
+[
+  {
+    "accountId": "smth",
+    "status": "ACCEPTED",
+    "direction": "OUTBOUND",
+    "created": "2024-08-25T22:39:33.320Z",
+    "favorite": false
+  }
+]
