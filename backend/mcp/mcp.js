@@ -14,11 +14,11 @@ express.use((req, res, next) => {
         });
     }
 
-    fs.readdirSync("./profiles.js").forEach((file) => {
+    fs.readdirSync("./backend/profiles/athena.json").forEach((file) => {
         if (file.endsWith(".json")) {
             const memory = functions.GetVersionInfo(req);
 
-            const profile = require(`./../profiles/${file}`);
+            const profile = require(`./profiles/${file}`);
             if (!profile.rvn) profile.rvn = 0;
             if (!profile.items) profile.items = {}
             if (!profile.stats) profile.stats = {}
@@ -38,7 +38,7 @@ express.use((req, res, next) => {
                     profile.stats.attributes.season_friend_match_boost = SeasonData.battlePassXPFriendBoost;
                 }
 
-                fs.writeFileSync("./profiles/athena.json", JSON.stringify(profile, null, 2));
+                fs.writeFileSync("./backend/profiles/athena.json/athena.json", JSON.stringify(profile, null, 2));
             }
         }
     })
@@ -48,7 +48,7 @@ express.use((req, res, next) => {
 
 // Set support a creator code
 express.post("/fortnite/api/game/v2/profile/*/client/SetAffiliateName", async (req, res) => {
-    const profile = require("./../profiles/common_core.json");
+    const profile = require("./../backend/profiles/athena.json/common_core.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -82,7 +82,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetAffiliateName", async (r
             "value": profile.stats.attributes.mtx_affiliate
         })
 
-        fs.writeFileSync("./profiles/common_core.json", JSON.stringify(profile, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/common_core.json", JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -107,7 +107,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetAffiliateName", async (r
 
 // Set STW banner
 express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseBanner", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -159,7 +159,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseBanner", async (
             })
         }
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -184,7 +184,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseBanner", async (
 
 // Set Homebase Name STW
 express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseName", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -228,7 +228,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseName", async (re
             })
         }
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -253,7 +253,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHomebaseName", async (re
 
 // Buy skill tree perk STW
 express.post("/fortnite/api/game/v2/profile/*/client/PurchaseHomebaseNode", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -285,7 +285,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseHomebaseNode", asyn
             "item": profile.items[ID]
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -310,8 +310,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseHomebaseNode", asyn
 
 // Open Winterfest presents (11.31, 19.01 & 23.10)
 express.post("/fortnite/api/game/v2/profile/*/client/UnlockRewardNode", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
-    const common_core = require("./../profiles/common_core.json");
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
+    const common_core = require("./../backend/profiles/athena.json/common_core.json");
     const WinterFestIDS = require("./../responses/Athena/winterfestRewards.json");
     const memory = functions.GetVersionInfo(req);
 
@@ -475,9 +475,9 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnlockRewardNode", async (r
             })
         }
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
         if (CommonCoreChanged == true) {
-            fs.writeFileSync("./profiles/common_core.json", JSON.stringify(common_core, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/common_core.json", JSON.stringify(common_core, null, 2));
         }
     }
 
@@ -504,7 +504,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnlockRewardNode", async (r
 
 // Remove gift box
 express.post("/fortnite/api/game/v2/profile/*/client/RemoveGiftBox", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -546,7 +546,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RemoveGiftBox", async (req,
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -571,7 +571,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RemoveGiftBox", async (req,
 
 // Set party assist quest
 express.post("/fortnite/api/game/v2/profile/*/client/SetPartyAssistQuest", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -594,7 +594,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetPartyAssistQuest", async
             "value": profile.stats.attributes.party_assist_quest
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -619,7 +619,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetPartyAssistQuest", async
 
 // Set pinned BR quest
 express.post("/fortnite/api/game/v2/profile/*/client/AthenaPinQuest", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -642,7 +642,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AthenaPinQuest", async (req
             "value": profile.stats.attributes.pinned_quest
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -667,7 +667,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AthenaPinQuest", async (req
 
 // Set pinned STW quests
 express.post("/fortnite/api/game/v2/profile/*/client/SetPinnedQuests", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -690,7 +690,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetPinnedQuests", async (re
             "value": profile.stats.attributes.client_settings
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -715,7 +715,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetPinnedQuests", async (re
 
 // Replace Daily Quests
 express.post("/fortnite/api/game/v2/profile/*/client/FortRerollDailyQuest", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -792,7 +792,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/FortRerollDailyQuest", asyn
             "newQuestId": DailyQuestIDS[randomNumber].templateId
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -818,7 +818,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/FortRerollDailyQuest", asyn
 
 // Mark New Quest Notification Sent
 express.post("/fortnite/api/game/v2/profile/*/client/MarkNewQuestNotificationSent", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -847,7 +847,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/MarkNewQuestNotificationSen
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -872,7 +872,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/MarkNewQuestNotificationSen
 
 // Check for new quests
 express.post("/fortnite/api/game/v2/profile/*/client/ClientQuestLogin", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
     var AthenaQuestIDS = JSON.parse(JSON.stringify(require("./../responses/Athena/quests.json")));
     var CampaignQuestIDS = JSON.parse(JSON.stringify(require("./../responses/Campaign/quests.json")));
     const memory = functions.GetVersionInfo(req);
@@ -1210,7 +1210,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClientQuestLogin", async (r
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1235,7 +1235,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClientQuestLogin", async (r
 
 // Reset item STW
 express.post("/fortnite/api/game/v2/profile/*/client/RefundItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1270,7 +1270,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefundItem", async (req, re
             "itemId": req.body.targetItemId
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1295,8 +1295,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefundItem", async (req, re
 
 // Refund V-Bucks purchase
 express.post("/fortnite/api/game/v2/profile/*/client/RefundMtxPurchase", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "common_core"}.json`);
-    const ItemProfile = require("./../profiles/athena.json");
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "common_core"}.json`);
+    const ItemProfile = require("./../backend/profiles/athena.json/athena.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1375,8 +1375,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefundMtxPurchase", async (
         MultiUpdate[0].profileRevision = ItemProfile.rvn || 0;
         MultiUpdate[0].profileCommandRevision = ItemProfile.commandRevision || 0;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
-        fs.writeFileSync(`./profiles/athena.json`, JSON.stringify(ItemProfile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/athena.json`, JSON.stringify(ItemProfile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1402,7 +1402,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefundMtxPurchase", async (
 
 // Increase a named counter value (e.g. when selecting a game mode)
 express.post("/fortnite/api/game/v2/profile/*/client/IncrementNamedCounterStat", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1429,7 +1429,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/IncrementNamedCounterStat",
             "value": profile.stats.attributes.named_counters
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1454,7 +1454,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/IncrementNamedCounterStat",
 
 // Claim STW daily reward
 express.post("/fortnite/api/game/v2/profile/*/client/ClaimLoginReward", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     const DailyRewards = require("./../responses/Campaign/dailyRewards.json");
     const memory = functions.GetVersionInfo(req);
 
@@ -1495,7 +1495,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimLoginReward", async (r
             })
         }
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1521,7 +1521,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimLoginReward", async (r
 
 // Update quest client objectives
 express.post("/fortnite/api/game/v2/profile/*/client/UpdateQuestClientObjectives", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1585,7 +1585,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpdateQuestClientObjectives
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1610,7 +1610,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpdateQuestClientObjectives
 
 // Equip team perk STW
 express.post("/fortnite/api/game/v2/profile/*/client/AssignTeamPerkToLoadout", async (req, res) => {
-    const profile = require("./../profiles/campaign.json");
+    const profile = require("./../backend/profiles/athena.json/campaign.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1634,7 +1634,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignTeamPerkToLoadout", a
             "attributeValue": profile.items[req.body.loadoutId].attributes.team_perk
         })
 
-        fs.writeFileSync("./profiles/campaign.json", JSON.stringify(profile, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/campaign.json", JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1659,7 +1659,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignTeamPerkToLoadout", a
 
 // Equip gadget STW
 express.post("/fortnite/api/game/v2/profile/*/client/AssignGadgetToLoadout", async (req, res) => {
-    const profile = require("./../profiles/campaign.json");
+    const profile = require("./../backend/profiles/athena.json/campaign.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1700,7 +1700,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignGadgetToLoadout", asy
             "attributeValue": profile.items[req.body.loadoutId].attributes.gadgets
         })
 
-        fs.writeFileSync("./profiles/campaign.json", JSON.stringify(profile, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/campaign.json", JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1725,7 +1725,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignGadgetToLoadout", asy
 
 // Assign worker to squad STW
 express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquad", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1786,7 +1786,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquad", async
             "attributeValue": profile.items[req.body.characterId].attributes.squad_slot_idx
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1811,7 +1811,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquad", async
 
 // Assign multiple workers to squad STW
 express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquadBatch", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -1873,7 +1873,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquadBatch", 
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -1898,9 +1898,9 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignWorkerToSquadBatch", 
 
 // Claim STW quest reward
 express.post("/fortnite/api/game/v2/profile/*/client/ClaimQuestReward", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
-    const common_core = require("./../profiles/common_core.json");
-    const theater0 = require("./../profiles/theater0.json");
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
+    const common_core = require("./../backend/profiles/athena.json/common_core.json");
+    const theater0 = require("./../backend/profiles/athena.json/theater0.json");
     var Rewards = require("./../responses/Campaign/rewards.json").quest;
 
     // do not change any of these or you will end up breaking it
@@ -2040,7 +2040,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimQuestReward", async (r
             MultiUpdate[0].profileRevision = theater0.rvn || 0;
             MultiUpdate[0].profileCommandRevision = theater0.commandRevision || 0;
 
-            fs.writeFileSync("./profiles/theater0.json", JSON.stringify(theater0, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/theater0.json", JSON.stringify(theater0, null, 2));
         }
 
         if (CommonCoreStatChanged == true) {
@@ -2049,7 +2049,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimQuestReward", async (r
             MultiUpdate[1].profileRevision = common_core.rvn || 0;
             MultiUpdate[1].profileCommandRevision = common_core.commandRevision || 0;
 
-            fs.writeFileSync("./profiles/common_core.json", JSON.stringify(common_core, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/common_core.json", JSON.stringify(common_core, null, 2));
         }
 
         ApplyProfileChanges.push({
@@ -2066,7 +2066,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimQuestReward", async (r
             "attributeValue": profile.items[req.body.questId].attributes.last_state_change_time
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2093,7 +2093,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimQuestReward", async (r
 
 // Level item up STW 1
 express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2117,7 +2117,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItem", async (req, r
             "attributeValue": profile.items[req.body.targetItemId].attributes.level
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2142,7 +2142,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItem", async (req, r
 
 // Level slotted item up STW
 express.post("/fortnite/api/game/v2/profile/*/client/UpgradeSlottedItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "collection_book_people0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "collection_book_people0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2172,7 +2172,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeSlottedItem", async 
             "attributeValue": profile.items[req.body.targetItemId].attributes.level
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "collection_book_people0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "collection_book_people0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2197,7 +2197,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeSlottedItem", async 
 
 // Level item up STW 2
 express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemBulk", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2223,7 +2223,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemBulk", async (re
             "attributeValue": profile.items[req.body.targetItemId].attributes.level
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2248,7 +2248,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemBulk", async (re
 
 // Evolve item STW
 express.post("/fortnite/api/game/v2/profile/*/client/ConvertItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2318,7 +2318,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ConvertItem", async (req, r
             ]
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2344,7 +2344,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ConvertItem", async (req, r
 
 // Evolve slotted item STW
 express.post("/fortnite/api/game/v2/profile/*/client/ConvertSlottedItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "collection_book_people0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "collection_book_people0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2414,7 +2414,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ConvertSlottedItem", async 
             ]
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "collection_book_people0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "collection_book_people0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2440,7 +2440,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ConvertSlottedItem", async 
 
 // Upgrade item rarity STW
 express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemRarity", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2505,7 +2505,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemRarity", async (
             ]
         }])
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2531,7 +2531,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeItemRarity", async (
 
 // Super charge item STW
 express.post("/fortnite/api/game/v2/profile/*/client/PromoteItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2555,7 +2555,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PromoteItem", async (req, r
             "attributeValue": profile.items[req.body.targetItemId].attributes.level
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2580,7 +2580,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PromoteItem", async (req, r
 
 // Transform items STW
 express.post("/fortnite/api/game/v2/profile/*/client/TransmogItem", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     var transformItemIDS = require("./../responses/Campaign/transformItemIDS.json");
 
     // do not change any of these or you will end up breaking it
@@ -2645,7 +2645,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/TransmogItem", async (req, 
             "item": Item
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2673,18 +2673,18 @@ express.post("/fortnite/api/game/v2/profile/*/client/TransmogItem", async (req, 
 express.post("/fortnite/api/game/v2/profile/*/client/CraftWorldItem", async (req, res) => {
     const memory = functions.GetVersionInfo(req);
 
-    const profile = require(`./../profiles/${req.query.profileId || "theater0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`);
     var schematic_profile;
     // do not change this
     var chosen_profile = false;
 
     if (4 <= memory.season || memory.build == 3.5 || memory.build == 3.6 && chosen_profile == false) {
-        schematic_profile = require("./../profiles/campaign.json");
+        schematic_profile = require("./../backend/profiles/athena.json/campaign.json");
         chosen_profile = true;
     }
 
     if (3 >= memory.season && chosen_profile == false) {
-        schematic_profile = require("./../profiles/profile0.json");
+        schematic_profile = require("./../backend/profiles/athena.json/profile0.json");
         chosen_profile = true;
     }
 
@@ -2815,7 +2815,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CraftWorldItem", async (req
             ]
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2841,7 +2841,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CraftWorldItem", async (req
 
 // Destroy item STW
 express.post("/fortnite/api/game/v2/profile/*/client/DestroyWorldItems", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "theater0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2867,7 +2867,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/DestroyWorldItems", async (
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2892,7 +2892,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/DestroyWorldItems", async (
 
 // Disassemble items STW
 express.post("/fortnite/api/game/v2/profile/*/client/DisassembleWorldItems", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "theater0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -2933,7 +2933,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/DisassembleWorldItems", asy
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -2958,8 +2958,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/DisassembleWorldItems", asy
 
 // Storage transfer STW
 express.post("/fortnite/api/game/v2/profile/*/client/StorageTransfer", async (req, res) => {
-    const theater0 = require("./../profiles/theater0.json");
-    const outpost0 = require("./../profiles/outpost0.json");
+    const theater0 = require("./../backend/profiles/athena.json/theater0.json");
+    const outpost0 = require("./../backend/profiles/athena.json/outpost0.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3371,8 +3371,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/StorageTransfer", async (re
         MultiUpdate[0].profileRevision = outpost0.rvn || 0;
         MultiUpdate[0].profileCommandRevision = outpost0.commandRevision || 0;
 
-        fs.writeFileSync("./profiles/theater0.json", JSON.stringify(theater0, null, 2));
-        fs.writeFileSync("./profiles/outpost0.json", JSON.stringify(outpost0, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/theater0.json", JSON.stringify(theater0, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/outpost0.json", JSON.stringify(outpost0, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3398,7 +3398,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/StorageTransfer", async (re
 
 // Modify quickbar STW
 express.post("/fortnite/api/game/v2/profile/*/client/ModifyQuickbar", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "theater0"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3441,7 +3441,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ModifyQuickbar", async (req
             "value": profile.stats.attributes.player_loadout
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "theater0"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3466,7 +3466,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ModifyQuickbar", async (req
 
 // Hero equipping STW
 express.post("/fortnite/api/game/v2/profile/*/client/AssignHeroToLoadout", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3621,7 +3621,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignHeroToLoadout", async
             "attributeValue": profile.items[req.body.loadoutId].attributes.crew_members
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3646,7 +3646,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AssignHeroToLoadout", async
 
 // Clear hero loadout STW
 express.post("/fortnite/api/game/v2/profile/*/client/ClearHeroLoadout", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3707,7 +3707,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClearHeroLoadout", async (r
             "attributeValue": profile.items[req.body.loadoutId].attributes.gadgets
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3734,7 +3734,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClearHeroLoadout", async (r
 express.post("/fortnite/api/game/v2/profile/*/client/RecycleItemBatch", async (req, res) => {
     const memory = functions.GetVersionInfo(req);
 
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3750,10 +3750,10 @@ express.post("/fortnite/api/game/v2/profile/*/client/RecycleItemBatch", async (r
             let id = req.body.targetItemIds[i];
 
             if (memory.season > 11 || memory.build == 11.30 || memory.build == 11.31 || memory.build == 11.40 || memory.build == 11.50) {
-                var collection_book_profile = require("./../profiles/collection_book_people0.json");
+                var collection_book_profile = require("./../backend/profiles/athena.json/collection_book_people0.json");
 
                 if (profile.items[id].templateId.toLowerCase().startsWith("schematic:")) {
-                    collection_book_profile = require("./../profiles/collection_book_schematics0.json");
+                    collection_book_profile = require("./../backend/profiles/athena.json/collection_book_schematics0.json");
                 }
 
                 if (MultiUpdate.length == 0) {
@@ -3834,7 +3834,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RecycleItemBatch", async (r
                 MultiUpdate[0].profileRevision = collection_book_profile.rvn;
                 MultiUpdate[0].profileCommandRevision = collection_book_profile.commandRevision;
 
-                fs.writeFileSync(`./profiles/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
+                fs.writeFileSync(`./backend/profiles/athena.json/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
             } else {
                 delete profile.items[id];
 
@@ -3852,7 +3852,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RecycleItemBatch", async (r
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3879,7 +3879,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RecycleItemBatch", async (r
 
 // Add item from collection book STW
 express.post("/fortnite/api/game/v2/profile/*/client/ResearchItemFromCollectionBook", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3917,7 +3917,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ResearchItemFromCollectionB
             "item": profile.items[ID]
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -3942,7 +3942,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ResearchItemFromCollectionB
 
 // Slot item in collection book STW
 express.post("/fortnite/api/game/v2/profile/*/client/SlotItemInCollectionBook", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -3952,10 +3952,10 @@ express.post("/fortnite/api/game/v2/profile/*/client/SlotItemInCollectionBook", 
     var QueryRevision = req.query.rvn || -1;
     var StatChanged = false;
 
-    var collection_book_profile = require("./../profiles/collection_book_people0.json");
+    var collection_book_profile = require("./../backend/profiles/athena.json/collection_book_people0.json");
 
     if (profile.items[req.body.itemId].templateId.toLowerCase().startsWith("schematic:")) {
-        collection_book_profile = require("./../profiles/collection_book_schematics0.json");
+        collection_book_profile = require("./../backend/profiles/athena.json/collection_book_schematics0.json");
     }
 
     if (req.body.itemId) {
@@ -4029,8 +4029,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/SlotItemInCollectionBook", 
             "slottedItemId": req.body.itemId
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
-        fs.writeFileSync(`./profiles/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4057,7 +4057,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SlotItemInCollectionBook", 
 
 // Unslot item from collection book STW
 express.post("/fortnite/api/game/v2/profile/*/client/UnslotItemFromCollectionBook", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4067,10 +4067,10 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnslotItemFromCollectionBoo
     var QueryRevision = req.query.rvn || -1;
     var StatChanged = false;
 
-    var collection_book_profile = require("./../profiles/collection_book_people0.json");
+    var collection_book_profile = require("./../backend/profiles/athena.json/collection_book_people0.json");
 
     if (req.body.templateId.toLowerCase().startsWith("schematic:")) {
-        collection_book_profile = require("./../profiles/collection_book_schematics0.json");
+        collection_book_profile = require("./../backend/profiles/athena.json/collection_book_schematics0.json");
     }
 
     const ID = functions.MakeID();
@@ -4126,8 +4126,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnslotItemFromCollectionBoo
         MultiUpdate[0].profileRevision = collection_book_profile.rvn || 0;
         MultiUpdate[0].profileCommandRevision = collection_book_profile.commandRevision || 0;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
-        fs.writeFileSync(`./profiles/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${collection_book_profile.profileId || "collection_book_people0"}.json`, JSON.stringify(collection_book_profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4154,7 +4154,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnslotItemFromCollectionBoo
 
 // Claim collection book rewards STW
 express.post("/fortnite/api/game/v2/profile/*/client/ClaimCollectionBookRewards", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4177,7 +4177,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimCollectionBookRewards"
             "value": profile.stats.attributes.collection_book
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4202,7 +4202,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ClaimCollectionBookRewards"
 
 // Modify schematic perk STW
 express.post("/fortnite/api/game/v2/profile/*/client/RespecAlteration", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4230,7 +4230,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecAlteration", async (r
             "attributeValue": profile.items[req.body.targetItemId].attributes.alterations
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4255,7 +4255,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecAlteration", async (r
 
 // Upgrade schematic perk STW
 express.post("/fortnite/api/game/v2/profile/*/client/UpgradeAlteration", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4294,7 +4294,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeAlteration", async (
             "attributeValue": profile.items[req.body.targetItemId].attributes.alterations
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4319,7 +4319,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UpgradeAlteration", async (
 
 // Reset research levels STW
 express.post("/fortnite/api/game/v2/profile/*/client/RespecResearch", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4346,7 +4346,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecResearch", async (req
             "value": profile.stats.attributes.research_levels
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4371,7 +4371,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecResearch", async (req
 
 // Reset upgrade levels STW
 express.post("/fortnite/api/game/v2/profile/*/client/RespecUpgrades", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4397,7 +4397,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecUpgrades", async (req
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4422,7 +4422,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RespecUpgrades", async (req
 
 // Upgrade research levels STW
 express.post("/fortnite/api/game/v2/profile/*/client/PurchaseResearchStatUpgrade", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4446,7 +4446,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseResearchStatUpgrade
             "value": profile.stats.attributes.research_levels
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4471,7 +4471,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseResearchStatUpgrade
 
 // Upgrade levels STW
 express.post("/fortnite/api/game/v2/profile/*/client/PurchaseOrUpgradeHomebaseNode", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -4520,7 +4520,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseOrUpgradeHomebaseNo
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4545,7 +4545,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseOrUpgradeHomebaseNo
 
 // Refresh expeditions STW
 express.post("/fortnite/api/game/v2/profile/*/client/RefreshExpeditions", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     var expeditionData = require("./../responses/Campaign/expeditionData.json");
 
     // do not change any of these or you will end up breaking it
@@ -4644,7 +4644,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefreshExpeditions", async 
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4669,7 +4669,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/RefreshExpeditions", async 
 
 // Start an expedition STW
 express.post("/fortnite/api/game/v2/profile/*/client/StartExpedition", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     const memory = functions.GetVersionInfo(req);
     var expeditionData = require("./../responses/Campaign/expeditionData.json");
 
@@ -4815,7 +4815,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/StartExpedition", async (re
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4840,7 +4840,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/StartExpedition", async (re
 
 // Abandon an expedition STW
 express.post("/fortnite/api/game/v2/profile/*/client/AbandonExpedition", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     var expeditionData = require("./../responses/Campaign/expeditionData.json");
 
     // do not change any of these or you will end up breaking it
@@ -4960,7 +4960,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AbandonExpedition", async (
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -4985,7 +4985,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/AbandonExpedition", async (
 
 // Collect a finished expedition STW
 express.post("/fortnite/api/game/v2/profile/*/client/CollectExpedition", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     var expeditionData = require("./../responses/Campaign/expeditionData.json");
 
     // do not change any of these or you will end up breaking it
@@ -5058,7 +5058,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CollectExpedition", async (
                         }
                     }
                     if (k == -1) {
-                        OtherProfiles.push(require(`./../profiles/${itemProfile}.json`))
+                        OtherProfiles.push(require(`./../backend/profiles/athena.json/${itemProfile}.json`))
                         k = MultiUpdate.length;
                         MultiUpdate.push({
                             "profileRevision": OtherProfiles[k].rvn || 0,
@@ -5161,7 +5161,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CollectExpedition", async (
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
 
         for (var i = 0; i < OtherProfiles.length; i++) {
             OtherProfiles[i].rvn += 1;
@@ -5170,7 +5170,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CollectExpedition", async (
             MultiUpdate[i].profileRevision += 1;
             MultiUpdate[i].profileCommandRevision += 1;
 
-            fs.writeFileSync(`./profiles/${OtherProfiles[i].profileId || "campaign"}.json`, JSON.stringify(OtherProfiles[i], null, 2));
+            fs.writeFileSync(`./backend/profiles/athena.json/${OtherProfiles[i].profileId || "campaign"}.json`, JSON.stringify(OtherProfiles[i], null, 2));
         }
     }
 
@@ -5198,7 +5198,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/CollectExpedition", async (
 
 // Set active hero loadout STW
 express.post("/fortnite/api/game/v2/profile/*/client/SetActiveHeroLoadout", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -5222,7 +5222,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetActiveHeroLoadout", asyn
             "value": profile.stats.attributes.selected_hero_loadout
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -5247,7 +5247,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetActiveHeroLoadout", asyn
 
 // Activate consumable STW
 express.post("/fortnite/api/game/v2/profile/*/client/ActivateConsumable", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -5294,7 +5294,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ActivateConsumable", async 
             })
         }
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -5319,7 +5319,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/ActivateConsumable", async 
 
 // Unassign all squads STW
 express.post("/fortnite/api/game/v2/profile/*/client/UnassignAllSquads", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -5354,7 +5354,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnassignAllSquads", async (
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -5379,7 +5379,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/UnassignAllSquads", async (
 
 // Open llama STW
 express.post("/fortnite/api/game/v2/profile/*/client/OpenCardPack", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     const cardpackData = require("./../responses/Campaign/cardPackData.json");
 
     // do not change any of these or you will end up breaking it
@@ -5491,7 +5491,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/OpenCardPack", async (req, 
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -5517,7 +5517,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/OpenCardPack", async (req, 
 
 // Add items to StW X-Ray Llamas
 express.post("/fortnite/api/game/v2/profile/*/client/PopulatePrerolledOffers", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
     const cardpackData = require("./../responses/Campaign/cardPackData.json");
 
     // do not change any of these or you will end up breaking it
@@ -5586,7 +5586,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PopulatePrerolledOffers", a
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -5611,9 +5611,9 @@ express.post("/fortnite/api/game/v2/profile/*/client/PopulatePrerolledOffers", a
 
 // Purchase item
 express.post("/fortnite/api/game/v2/profile/*/client/PurchaseCatalogEntry", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "profile0"}.json`);
-    const campaign = require("./../profiles/campaign.json");
-    const athena = require("./../profiles/athena.json");
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`);
+    const campaign = require("./../backend/profiles/athena.json/campaign.json");
+    const athena = require("./../backend/profiles/athena.json/athena.json");
     const cardpackData = require("./../responses/Campaign/cardPackData.json");
 
     // do not change any of these or you will end up breaking it
@@ -6300,15 +6300,15 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseCatalogEntry", asyn
                 MultiUpdate[0].profileCommandRevision = athena.commandRevision || 0;
             }
 
-            fs.writeFileSync("./profiles/athena.json", JSON.stringify(athena, null, 2));
-            fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/athena.json", JSON.stringify(athena, null, 2));
+            fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
         }
 
         if (AthenaModified == false) {
             profile.rvn += 1;
             profile.commandRevision += 1;
 
-            fs.writeFileSync(`./profiles/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
+            fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "profile0"}.json`, JSON.stringify(profile, null, 2));
         }
     }
 
@@ -7201,8 +7201,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseCatalogEntry", asyn
                 MultiUpdate[0].profileCommandRevision = athena.commandRevision || 0;
             }
 
-            fs.writeFileSync("./profiles/athena.json", JSON.stringify(athena, null, 2));
-            fs.writeFileSync(`./profiles/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/athena.json", JSON.stringify(athena, null, 2));
+            fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
         }
 
         if (AthenaModified == false) {
@@ -7214,8 +7214,8 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseCatalogEntry", asyn
                 MultiUpdate[0].profileCommandRevision = campaign.commandRevision || 0;
             }
 
-            fs.writeFileSync("./profiles/campaign.json", JSON.stringify(campaign, null, 2));
-            fs.writeFileSync(`./profiles/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
+            fs.writeFileSync("./backend/profiles/athena.json/campaign.json", JSON.stringify(campaign, null, 2));
+            fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "common_core"}.json`, JSON.stringify(profile, null, 2));
         }
     }
 
@@ -7243,7 +7243,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PurchaseCatalogEntry", asyn
 
 // Archive locker items
 express.post("/fortnite/api/game/v2/profile/*/client/SetItemArchivedStatusBatch", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7269,7 +7269,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemArchivedStatusBatch"
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7294,7 +7294,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemArchivedStatusBatch"
 
 // Set multiple items favorite
 express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatusBatch", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7320,7 +7320,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatusBatch"
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7345,7 +7345,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatusBatch"
 
 // Set favorite on item
 express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatus", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7369,7 +7369,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatus", asy
             "attributeValue": profile.items[req.body.targetItemId].attributes.favorite
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7394,7 +7394,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetItemFavoriteStatus", asy
 
 // Mark item as seen
 express.post("/fortnite/api/game/v2/profile/*/client/MarkItemSeen", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7420,7 +7420,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/MarkItemSeen", async (req, 
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7445,7 +7445,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/MarkItemSeen", async (req, 
 
 // Equip BR Locker 1
 express.post("/fortnite/api/game/v2/profile/*/client/EquipBattleRoyaleCustomization", async (req, res) => {
-    const profile = require("./../profiles/athena.json");
+    const profile = require("./../backend/profiles/athena.json/athena.json");
 
     try {
         if (!profile.stats.attributes.favorite_dance) {
@@ -7584,7 +7584,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/EquipBattleRoyaleCustomizat
                 "attributeValue": profile.items[req.body.itemToSlot].attributes.variants
             })
         }
-        fs.writeFileSync("./profiles/athena.json", JSON.stringify(profile, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/athena.json", JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7609,7 +7609,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/EquipBattleRoyaleCustomizat
 
 // Set BR Banner 1
 express.post("/fortnite/api/game/v2/profile/*/client/SetBattleRoyaleBanner", async (req, res) => {
-    const profile = require("./../profiles/athena.json");
+    const profile = require("./../backend/profiles/athena.json/athena.json");
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7639,7 +7639,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetBattleRoyaleBanner", asy
             "value": profile.stats.attributes.banner_color
         })
 
-        fs.writeFileSync("./profiles/athena.json", JSON.stringify(profile, null, 2));
+        fs.writeFileSync("./backend/profiles/athena.json/athena.json", JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7664,7 +7664,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetBattleRoyaleBanner", asy
 
 // Set BR Banner 2
 express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerBanner", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7696,7 +7696,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerBanner", a
             "attributeValue": profile.items[req.body.lockerItem].attributes.banner_color_template
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7721,7 +7721,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerBanner", a
 
 // Set BR Locker 2
 express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerSlot", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7852,7 +7852,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerSlot", asy
             "attributeValue": profile.items[req.body.lockerItem].attributes.locker_slots_data
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7877,7 +7877,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetCosmeticLockerSlot", asy
 
 // Set BR Locker 3
 express.post("/fortnite/api/game/v2/profile/*/client/PutModularCosmeticLoadout", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7946,7 +7946,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PutModularCosmeticLoadout",
         profile.rvn += 1;
         profile.commandRevision += 1;
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -7971,7 +7971,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/PutModularCosmeticLoadout",
 
 // Set Active Archetype (e.g. main vehicle in v30.00+)
 express.post("/fortnite/api/game/v2/profile/*/client/SetActiveArchetype", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -7999,7 +7999,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetActiveArchetype", async 
             "value": profile.stats.attributes.loadout_archetype_values
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "athena"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -8024,7 +8024,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetActiveArchetype", async 
 
 // Set hero variants STW
 express.post("/fortnite/api/game/v2/profile/*/client/SetHeroCosmeticVariants", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "campaign"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
@@ -8056,7 +8056,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHeroCosmeticVariants", a
             "attributeValue": profile.items[req.body.heroItem].attributes.backblingvariants
         })
 
-        fs.writeFileSync(`./profiles/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
+        fs.writeFileSync(`./backend/profiles/athena.json/${req.query.profileId || "campaign"}.json`, JSON.stringify(profile, null, 2));
     }
 
     // this doesn't work properly on version v12.20 and above but whatever
@@ -8081,7 +8081,7 @@ express.post("/fortnite/api/game/v2/profile/*/client/SetHeroCosmeticVariants", a
 
 // any mcp request that doesn't have something assigned to it
 express.post("/fortnite/api/game/v2/profile/*/client/*", async (req, res) => {
-    const profile = require(`./../profiles/${req.query.profileId || "athena"}.json`);
+    const profile = require(`./../backend/profiles/athena.json/${req.query.profileId || "athena"}.json`);
 
     // do not change any of these or you will end up breaking it
     var ApplyProfileChanges = [];
