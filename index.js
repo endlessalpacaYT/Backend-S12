@@ -5,6 +5,8 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+// Wont lie i used chatgpt for this function, im gonna go sleep now i might start going crazy PS: marv pls dont hate me for this
 function startBackend() {
     return new Promise((resolve, reject) => {
         const backendDir = path.join(__dirname, 'backend');
