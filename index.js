@@ -1,3 +1,5 @@
+// BTW: this file is for starting the frontend and backend
+
 const { spawn } = require('child_process');
 const path = require('path');
 
