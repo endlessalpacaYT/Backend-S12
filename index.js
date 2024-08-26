@@ -1,65 +1,38 @@
-const Express = require("express");
-const express = Express();
-const fs = require("fs");
-const path = require("path");
-const cookieParser = require("cookie-parser");
+const { spawn } = require('child_process');
+const path = require('path');
 
-express.use(Express.json());
-express.use(Express.urlencoded({ extended: true }));
-express.use(Express.static('public'));
-express.use(cookieParser());
-
-express.use(require("./backend/structure/party.js"));
-express.use(require("./backend/structure/discovery.js"))
-express.use(require("./backend/structure/privacy.js"));
-express.use(require("./backend/structure/timeline.js"));
-express.use(require("./backend/structure/user.js"));
-express.use(require("./backend/structure/contentpages.js"));
-express.use(require("./backend/structure/friends.js"));
-express.use(require("./backend/structure/main.js"));
-express.use(require("./backend/structure/storefront.js"));
-express.use(require("./backend/structure/version.js"));
-express.use(require("./backend/structure/lightswitch.js"));
-express.use(require("./backend/structure/affiliate.js"));
-express.use(require("./backend/matchmaker/matchmaking.js"));
-express.use(require("./backend/structure/cloudstorage.js"));
-express.use(require("./backend/mcp/mcp.js"));
-
-const port = process.env.PORT || 3551;
-express.listen(port, () => {
-    console.log("LawinServer started listening on port", port);
-
-    require("./backend/xmpp/xmpp.js");
-}).on("error", (err) => {
-    if (err.code == "EADDRINUSE") console.log(`\x1b[31mERROR\x1b[0m: Port ${port} is already in use!`);
-    else throw err;
-
-    process.exit(0);
-});
-
-try {
-    if (!fs.existsSync(path.join(process.env.LOCALAPPDATA, "LawinServer"))) fs.mkdirSync(path.join(process.env.LOCALAPPDATA, "LawinServer"));
-} catch (err) {
-    // fallback
-    if (!fs.existsSync(path.join(__dirname, "ClientSettings"))) fs.mkdirSync(path.join(__dirname, "ClientSettings"));
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// if endpoint not found, return this error
-express.use((req, res, next) => {
-    var XEpicErrorName = "errors.com.lawinserver.common.not_found";
-    var XEpicErrorCode = 1004;
+function startBackend() {
+    return new Promise((resolve, reject) => {
+        const backendDir = path.join(__dirname, 'backend');
+        const indexPath = path.join(backendDir, 'index.js');
 
-    res.set({
-        'X-Epic-Error-Name': XEpicErrorName,
-        'X-Epic-Error-Code': XEpicErrorCode
-    });
+        const child = spawn('node', [indexPath], {
+            cwd: backendDir,
+            stdio: 'inherit' 
+        });
 
-    res.status(404);
-    res.json({
-        "errorCode": XEpicErrorName,
-        "errorMessage": "Sorry the resource you were trying to find could not be found",
-        "numericErrorCode": XEpicErrorCode,
-        "originatingService": "any",
-        "intent": "prod"
+        child.on('close', (code) => {
+            console.log(`index.js process exited with code ${code}`);
+            resolve(code);
+        });
+
+        child.on('error', (err) => {
+            console.error(`Failed to start process: ${err.message}`);
+            reject(err);
+        });
     });
-});
+}
+
+(async () => {
+    try {
+        startBackend();
+        await delay(1000);
+        console.log('Backend process started.');
+    } catch (error) {
+        console.error(`Error occurred: ${error.message}`);
+    }
+})();
