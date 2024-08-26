@@ -27,7 +27,7 @@ express.use(require("./mcp/mcp.js"));
 
 const port = process.env.PORT || 3551;
 express.listen(port, () => {
-    console.log("LawinServer started listening on port", port);
+    console.log("Backend S12 started listening on port", port);
 
     require("./xmpp/xmpp.js");
 }).on("error", (err) => {
