@@ -34,6 +34,7 @@ function startBackend() {
 (async () => {
     try {
         startBackend();
+        // added this deleay cuz i wanted the log to show after it started yk, its the little things that count :)
         await delay(1000);
         console.log('Backend process started.');
     } catch (error) {
