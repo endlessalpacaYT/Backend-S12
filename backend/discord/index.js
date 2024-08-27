@@ -1,7 +1,7 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -47,11 +47,11 @@ function setBotStatus() {
     client.user.setPresence({
         activities: [
             {
-                name: 'Backend S12',
-                type: 'WATCHING'
+                name: "Backend S12",
+                type: ActivityType.Watching 
             }
         ],
-        status: 'dnd'
+        status: 'dnd' 
     })
 }
 
