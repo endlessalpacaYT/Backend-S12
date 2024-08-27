@@ -9,7 +9,7 @@
       "_type": "CommonUI Simple Message",
       "message": {
         "_type": "CommonUI Simple Message Base",
-        "title": "LawinServer",
+        "title": "Backend S12",
         "body": "Join our discord: https://discord.gg/KJ8UaHZ\nYouTube: Lawin\nTwitter: @lawin_010"
       }
     },
@@ -222,8 +222,8 @@
           "hidden": false,
           "_type": "CommonUI Simple Message Base",
           "adspace": "ENJOY!",
-          "title": "LawinServer",
-          "body": "Enjoy LawinServer!",
+          "title": "Backend S12",
+          "body": "Enjoy Backend S12!",
           "spotlight": false
         }
       ]
@@ -1360,29 +1360,29 @@
       "tournaments": [
         {
           "title_color": "FFFFFF",
-          "loading_screen_image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd.png",
+          "loading_screen_image": "https://wallpapercave.com/wp/wp5607300.png",
           "background_text_color": "040E4C",
           "background_right_color": "012162",
           "poster_back_image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/poster_back.png",
           "_type": "Tournament Display Info",
           "pin_score_requirement": 420,
-          "pin_earned_text": "Lawin is the winner!",
-          "tournament_display_id": "lawinserver_cup",
+          "pin_earned_text": "Pongo is the winner!",
+          "tournament_display_id": "s12_cup",
           "highlight_color": "F7FF00",
           "schedule_info": "Oct 16th 2018",
           "primary_color": "FFFFFF",
-          "flavor_description": "Have a phenomenal gaming experience!",
+          "flavor_description": "Created By Pongo_x86!",
           "poster_front_image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/poster_front.png",
           "short_format_title": "",
           "title_line_2": "Solo",
-          "title_line_1": "LawinServer Cup",
+          "title_line_1": "Backend S12 Cup",
           "shadow_color": "000F4A",
-          "details_description": "LAWINSERVER CUP",
+          "details_description": "Backend S12 CUP",
           "background_left_color": "0076C3",
           "long_format_title": "",
           "poster_fade_color": "0076C3",
           "secondary_color": "000F4A",
-          "playlist_tile_image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd-s.png",
+          "playlist_tile_image": "https://wallpapercave.com/wp/wp5607300.png",
           "base_color": "FFFFFF"
         }
       ],
@@ -1401,8 +1401,8 @@
         {
           "hidden": false,
           "_type": "CommonUI Simple Message Base",
-          "title": "LawinServer",
-          "body": "Server created by Lawin (Twitter: @lawin_010)\nDiscord: https://discord.gg/KJ8UaHZ",
+          "title": "Backend S12",
+          "body": "Backend Created By Pongo_x86, Welcome To Backend S12!",
           "spotlight": true
         }
       ]
@@ -1426,8 +1426,8 @@
           "gamemodes": [],
           "hidden": false,
           "_type": "CommonUI Emergency Notice Base",
-          "title": "LawinServer",
-          "body": "Server created by Lawin (Twitter: @lawin_010)\nDiscord: https://discord.gg/KJ8UaHZ"
+          "title": "Backend S12",
+          "body": "Backend Created By Pongo_x86, Welcome To Backend S12!"
         }
       ]
     },
@@ -1915,30 +1915,30 @@
       "motds": [
         {
           "entryType": "Website",
-          "image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd.png",
-          "tileImage": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd-s.png",
+          "image": "https://wallpapercave.com/wp/wp5607300.png",
+          "tileImage": "https://wallpapercave.com/wp/wp5607300.png",
           "videoMute": false,
           "hidden": false,
-          "tabTitleOverride": "LawinServer",
+          "tabTitleOverride": "Backend S12",
           "_type": "CommonUI Simple Message MOTD",
           "title": {
-            "ar": "مرحبًا بك في LawinServer!",
-            "en": "Welcome to LawinServer!",
-            "de": "Willkommen bei LawinServer!",
-            "es": "¡Bienvenidos a LawinServer!",
-            "es-419": "¡Bienvenidos a LawinServer!",
-            "fr": "Bienvenue sur LawinServer !",
-            "it": "Benvenuto in LawinServer!",
-            "ja": "LawinServerへようこそ！",
-            "ko": "LawinServer에 오신 것을 환영합니다!",
-            "pl": "Witaj w LawinServerze!",
-            "pt-BR": "Bem-vindo ao LawinServer!",
-            "ru": "Добро пожаловать в LawinServer!",
+            "ar": "مرحبًا بك في Backend S12!",
+            "en": "Welcome to Backend S12!",
+            "de": "Willkommen bei Backend S12!",
+            "es": "¡Bienvenidos a Backend S12!",
+            "es-419": "¡Bienvenidos a Backend S12!",
+            "fr": "Bienvenue sur Backend S12 !",
+            "it": "Benvenuto in Backend S12!",
+            "ja": "Backend S12へようこそ！",
+            "ko": "Backend S12에 오신 것을 환영합니다!",
+            "pl": "Witaj w Backend S12ze!",
+            "pt-BR": "Bem-vindo ao Backend S12!",
+            "ru": "Добро пожаловать в Backend S12!",
             "tr": "LavinServer'a Hoş Geldiniz!"
           },
           "body": {
             "ar": "استمتع بتجربة لعب استثنائية!",
-            "en": "Have a phenomenal gaming experience!",
+            "en": "Created By Pongo_x86!",
             "de": "Wünsche allen ein wunderbares Spielerlebnis!",
             "es": "¡Que disfrutes de tu experiencia de videojuegos!",
             "es-419": "¡Ten una experiencia de juego espectacular!",
@@ -1955,8 +1955,6 @@
           "videoLoop": false,
           "videoStreamingEnabled": false,
           "sortingPriority": 90,
-          "websiteButtonText": "Discord",
-          "websiteURL": "https://discord.gg/KJ8UaHZ",
           "id": "61fb3dd8-f23d-45cc-9058-058ab223ba5c",
           "videoAutoplay": false,
           "videoFullscreen": false,
@@ -1978,8 +1976,8 @@
           "hidden": false,
           "_type": "CommonUI Simple Message Base",
           "adspace": "ENJOY!",
-          "title": "LawinServer",
-          "body": "Enjoy LawinServer!",
+          "title": "Backend S12",
+          "body": "Enjoy Backend S12!",
           "spotlight": false
         }
       ]
@@ -1998,30 +1996,30 @@
       "motds": [
         {
           "entryType": "Website",
-          "image": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd.png",
-          "tileImage": "https://fortnite-public-service-prod11.ol.epicgames.com/images/motd-s.png",
+          "image": "https://wallpapercave.com/wp/wp5607300.png",
+          "tileImage": "https://wallpapercave.com/wp/wp5607300.png",
           "videoMute": false,
           "hidden": false,
-          "tabTitleOverride": "LawinServer",
+          "tabTitleOverride": "Backend S12",
           "_type": "CommonUI Simple Message MOTD",
           "title": {
-            "ar": "مرحبًا بك في LawinServer!",
-            "en": "Welcome to LawinServer!",
-            "de": "Willkommen bei LawinServer!",
-            "es": "¡Bienvenidos a LawinServer!",
-            "es-419": "¡Bienvenidos a LawinServer!",
-            "fr": "Bienvenue sur LawinServer !",
-            "it": "Benvenuto in LawinServer!",
-            "ja": "LawinServerへようこそ！",
-            "ko": "LawinServer에 오신 것을 환영합니다!",
-            "pl": "Witaj w LawinServerze!",
-            "pt-BR": "Bem-vindo ao LawinServer!",
-            "ru": "Добро пожаловать в LawinServer!",
+            "ar": "مرحبًا بك في Backend S12!",
+            "en": "Welcome to Backend S12!",
+            "de": "Willkommen bei Backend S12!",
+            "es": "¡Bienvenidos a Backend S12!",
+            "es-419": "¡Bienvenidos a Backend S12!",
+            "fr": "Bienvenue sur Backend S12 !",
+            "it": "Benvenuto in Backend S12!",
+            "ja": "Backend S12へようこそ！",
+            "ko": "Backend S12에 오신 것을 환영합니다!",
+            "pl": "Witaj w Backend S12ze!",
+            "pt-BR": "Bem-vindo ao Backend S12!",
+            "ru": "Добро пожаловать в Backend S12!",
             "tr": "LavinServer'a Hoş Geldiniz!"
           },
           "body": {
             "ar": "استمتع بتجربة لعب استثنائية!",
-            "en": "Have a phenomenal gaming experience!",
+            "en": "Created By Pongo_x86!",
             "de": "Wünsche allen ein wunderbares Spielerlebnis!",
             "es": "¡Que disfrutes de tu experiencia de videojuegos!",
             "es-419": "¡Ten una experiencia de juego espectacular!",
@@ -2038,8 +2036,6 @@
           "videoLoop": false,
           "videoStreamingEnabled": false,
           "sortingPriority": 90,
-          "websiteButtonText": "Discord",
-          "websiteURL": "https://discord.gg/KJ8UaHZ",
           "id": "61fb3dd8-f23d-45cc-9058-058ab223ba5c",
           "videoAutoplay": false,
           "videoFullscreen": false,
@@ -2098,8 +2094,8 @@
           "hidden": false,
           "_type": "CommonUI Simple Message Base",
           "adspace": "ENJOY!",
-          "title": "LawinServer",
-          "body": "Enjoy LawinServer!",
+          "title": "Backend S12",
+          "body": "Enjoy Backend S12!",
           "spotlight": false
         }
       ]
@@ -2132,7 +2128,7 @@
           "bHidden": false,
           "sectionId": "Featured",
           "bShowTimer": true,
-          "sectionDisplayName": "LawinServer Item Shop",
+          "sectionDisplayName": "Backend S12 Item Shop",
           "bShowIneligibleOffers": true
         }
       ]
@@ -2181,10 +2177,10 @@
               }
             ]
           },
-          "displayName": "LawinServer Item Shop",
+          "displayName": "Backend S12 Item Shop",
           "_type": "MP Item Shop - Section",
-          "sectionID": "LawinServer",
-          "category": "LawinServer Item Shop"
+          "sectionID": "Backend S12",
+          "category": "Backend S12 Item Shop"
         }
       ]
     },

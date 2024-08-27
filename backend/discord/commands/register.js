@@ -1,5 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
+const User = require('../../Models/user.js');
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
@@ -24,14 +27,55 @@ module.exports = {
         const username = interaction.options.getString('username');
         const email = interaction.options.getString('email');
         const password = interaction.options.getString('password');
-        const embed = new EmbedBuilder()
-            .setColor("#a600ff")
-            .setTitle("Successfully Registered")
-            .setDescription("Registered With The Username: " + username);
+        const userId = interaction.user.id;
 
-        await interaction.reply({ embeds: [embed] });
-        if (verboseLogging == "true") {
-            console.log("A User Has Registered With The Username: " + username);
+        function generateAccountId() {
+            const uuid = uuidv4();
+            const accountId = uuid.replace(/-/g, '').substring(0, 32);
+            return accountId.toUpperCase();
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        try {
+            const existingUser = await User.findOne({ discordId: userId });
+
+            if (existingUser) {
+                const embed = new EmbedBuilder()
+                    .setColor("#ff0000")
+                    .setTitle("Failed To Create An Account!")
+                    .setDescription("Reason: You already created an account!");
+
+                await interaction.reply({ embeds: [embed], ephemeral: true });
+                return;
+            }
+
+            const newUser = new User({
+                created: new Date(),
+                banned: false,
+                discordId: userId,
+                accountId: generateAccountId(),
+                username: username,
+                username_lower: username.toLowerCase(),
+                email: email,
+                password: hashedPassword
+            });
+
+            await newUser.save();
+
+            const embed = new EmbedBuilder()
+                .setColor("#a600ff")
+                .setTitle("Successfully Registered")
+                .setDescription("Registered With The Username: " + username);
+
+            await interaction.reply({ embeds: [embed] });
+
+            if (verboseLogging === "true") {
+                console.log("User: " + userId + " Has Registered With The Username: " + username);
+            }
+        } catch (error) {
+            console.error('Error registering user:', error);
+            await interaction.reply({ content: 'There was an error registering your account. Please try again later.', ephemeral: true });
         }
     }
-}
+};
