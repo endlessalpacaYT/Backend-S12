@@ -292,8 +292,8 @@ function getContentPages(req) {
         } else if (memory.season == 27) {
             backgrounds[0].stage = "rufus";
         } else {
-            backgrounds[0].stage = "defaultnotris";
-            backgrounds[0].backgroundimage = "https://fortnite-public-service-prod11.ol.epicgames.com/images/lightlobbybg.png";
+            contentpages.dynamicbackgrounds.backgrounds.backgrounds[0].stage = season12;
+            contentpages.dynamicbackgrounds.backgrounds.backgrounds[1].stage = season12;
         }
 
     } catch (err) {}

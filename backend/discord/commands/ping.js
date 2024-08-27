@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         try {
             const embed = new EmbedBuilder()
-                .setColor("#75f542")
+                .setColor("#a600ff")
                 .setTitle("Pong!")
                 .setDescription("The Backend Is Online!");
 
