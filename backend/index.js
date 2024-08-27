@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 require('dotenv').config();
+const mongoose = require("mongoose");
 
 express.use(Express.json());
 express.use(Express.urlencoded({ extended: true }));
@@ -73,9 +74,38 @@ express.use((req, res, next) => {
     });
 });
 
+async function initDB() {
+    const DB = process.env.DB;
+    console.log("MongoDB Connecting To: " + DB);
+    try {
+        await mongoose.connect(DB);
+        console.log("MongoDB Connected To: " + DB);
+
+        const testSchema = new mongoose.Schema({
+            username: { type: String, required: true }
+        }, { timestamps: true });
+
+        const TestModel = mongoose.model('Test', testSchema);
+
+        const testDoc = new TestModel({
+            username: "Test"
+        });
+
+        const savedDoc = await testDoc.save();
+        console.log("Test Document Saved: ", savedDoc);
+
+    } catch (err) {
+        console.log("ERR: Could Not Connect To DB or Save Document! : ", err);
+    }
+}
+
+/* Function to start backend,
+I want to create a way to restart backend in future using frontend so this might come in handy*/
+
 function startBackend() {
     console.log("Starting Backend!");
     startHttpServer();
+    initDB();
     require("./xmpp/xmpp.js");
     delay(100);
     startBot();
