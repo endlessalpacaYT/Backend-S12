@@ -27,12 +27,22 @@ express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
 express.use(require("./mcp/mcp.js"));
 
+const verboseLogging = process.env.VERBOSE_LOGGING;
+
+if (verboseLogging == "false") {
+    console.log("Verbose Logging: Off");
+}else {
+    console.log("Verbose Logging Is On (This Is Good For Debugging)");
+}
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function startBot() {
-    console.log("Discord Integration Is Starting!");
+    if (verboseLogging == "true") {
+        console.log("Discord Integration Is Starting!");
+    }
     delay(500);
     require("./discord/index.js");
 }
@@ -76,7 +86,9 @@ express.use((req, res, next) => {
 
 async function initDB() {
     const DB = process.env.DB;
-    console.log("MongoDB Connecting To: " + DB);
+    if (verboseLogging == "true") {
+        console.log("MongoDB Connecting To: " + DB);
+    }
     try {
         await mongoose.connect(DB);
         console.log("MongoDB Connected To: " + DB);
@@ -92,7 +104,9 @@ async function initDB() {
         });
 
         const savedDoc = await testDoc.save();
-        console.log("Test Document Saved: ", savedDoc);
+        if (verboseLogging == "true") {
+            console.log("Test Document Saved: ", savedDoc);
+        }
 
     } catch (err) {
         console.log("ERR: Could Not Connect To DB or Save Document! : ", err);
