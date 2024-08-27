@@ -4,9 +4,13 @@
   "description": "A fortnite backend which supports both BR and STW for every single fortnite build.",
   "main": "index.js",
   "dependencies": {
+    "@discordjs/rest": "^2.3.0",
     "cookie-parser": "^1.4.6",
+    "discord-api-types": "^0.37.98",
+    "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
     "ini": "^2.0.0",
     "path": "^0.12.7",
     "uuid": "^8.3.2",

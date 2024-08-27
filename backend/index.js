@@ -37,7 +37,7 @@ function startBot() {
 }
 
 function startHttpServer() {
-    const port = process.env.PORT;
+    const port = process.env.PORT || 3551;
     express.listen(port, () => {
         console.log(`Backend S12 Started On 127.0.0.1:${port}`);
     }).on("error", (err) => {
