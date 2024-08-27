@@ -1,11 +1,23 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
+        .setName("ping")
+        .setDescription("Check if the backend is up!"),
+
     async execute(interaction) {
-        await interaction.reply('Pong!');
-        console.log("Pong Replied!");
-    },
+        try {
+            const embed = new EmbedBuilder()
+                .setColor("#75f542")
+                .setTitle("Pong!")
+                .setDescription("The Backend Is Online!");
+
+            await interaction.reply({ embeds: [embed] });
+            console.log("Ping command executed successfully.");
+        } catch (error) {
+            console.error("Error executing ping command:", error);
+            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        }
+    }
 };
