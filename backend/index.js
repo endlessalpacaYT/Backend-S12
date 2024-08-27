@@ -9,33 +9,43 @@ express.use(Express.urlencoded({ extended: true }));
 express.use(Express.static('public'));
 express.use(cookieParser());
 
-express.use(require("./structure/party.js"));
-express.use(require("./structure/discovery.js"))
-express.use(require("./structure/privacy.js"));
-express.use(require("./structure/timeline.js"));
-express.use(require("./structure/user.js"));
-express.use(require(".//structure/contentpages.js"));
-express.use(require("./structure/friends.js"));
-express.use(require("./structure/main.js"));
-express.use(require("./structure/storefront.js"));
-express.use(require("./structure/version.js"));
-express.use(require("./structure/lightswitch.js"));
-express.use(require("./structure/affiliate.js"));
-express.use(require("./matchmaker/matchmaking.js"));
-express.use(require("./structure/cloudstorage.js"));
-express.use(require("./mcp/mcp.js"));
+function initApp() {
+    express.use(require("./structure/party.js"));
+    express.use(require("./structure/discovery.js"));
+    express.use(require("./structure/privacy.js"));
+    express.use(require("./structure/timeline.js"));
+    express.use(require("./structure/user.js"));
+    express.use(require("./structure/contentpages.js"));
+    express.use(require("./structure/friends.js"));
+    express.use(require("./structure/main.js"));
+    express.use(require("./structure/storefront.js"));
+    express.use(require("./structure/version.js"));
+    express.use(require("./structure/lightswitch.js"));
+    express.use(require("./structure/affiliate.js"));
+    express.use(require("./matchmaker/matchmaking.js"));
+    express.use(require("./structure/cloudstorage.js"));
+    express.use(require("./mcp/mcp.js"));
+}
 
-const port = process.env.PORT || 3551;
-express.listen(port, () => {
-    console.log("Backend S12 started listening on port", port);
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    require("./xmpp/xmpp.js");
-}).on("error", (err) => {
-    if (err.code == "EADDRINUSE") console.log(`\x1b[31mERROR\x1b[0m: Port ${port} is already in use!`);
-    else throw err;
+function startBot() {
+    console.log("Discord Integration Is Starting!");
+    delay(500);
+    require("./discord/index.js");
+}
 
-    process.exit(0);
-});
+function startHttpServer() {
+    const port = process.env.PORT || 3551;
+    express.listen(port, () => {
+        console.log(`Backend S12 Started On 127.0.0.1:${port}`);
+    }).on("error", (err) => {
+        if (err.code == "EADDRINUSE") console.log(`\x1b[31mERROR\x1b[0m: Port ${port} is already in use!`);
+        else throw err; 
+    });
+}
 
 try {
     if (!fs.existsSync(path.join(process.env.LOCALAPPDATA, "LawinServer"))) fs.mkdirSync(path.join(process.env.LOCALAPPDATA, "LawinServer"));
@@ -63,3 +73,14 @@ express.use((req, res, next) => {
         "intent": "prod"
     });
 });
+
+function startBackend() {
+    console.log("Starting Backend!");
+    initApp();
+    startHttpServer();
+    require("./xmpp/xmpp.js");
+    delay(100);
+    startBot();
+}
+
+startBackend()
