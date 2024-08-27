@@ -12,6 +12,7 @@ const verboseLogging = process.env.VERBOSE_LOGGING;
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     registerCommands();
+    setBotStatus();
 });
 
 async function registerCommands() {
@@ -40,6 +41,18 @@ async function registerCommands() {
     } catch (error) {
         console.error('Error reloading commands:', error);
     }
+}
+
+function setBotStatus() {
+    client.user.setPresence({
+        activities: [
+            {
+                name: 'Backend S12',
+                type: 'WATCHING'
+            }
+        ],
+        status: 'dnd'
+    })
 }
 
 client.on('interactionCreate', async interaction => {
