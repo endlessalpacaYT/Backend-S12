@@ -4,8 +4,6 @@ const User = require('../Models/user.js');
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/version', (req, res) => {
     res.send({ version: '0.1'});
