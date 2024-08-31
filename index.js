@@ -2,6 +2,7 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
+const chalk = require('chalk');
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -36,7 +37,7 @@ function startBackend() {
         startBackend();
         // added this deleay cuz i wanted the log to show after it started yk, its the little things that count :)
         await delay(1000);
-        console.log('Backend process started.');
+        console.log(`${chalk.keyword('orange')('[Main]')} Backend Process Started!`);
     } catch (error) {
         console.error(`Error occurred: ${error.message}`);
     }

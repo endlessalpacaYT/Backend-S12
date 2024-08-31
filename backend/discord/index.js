@@ -4,13 +4,14 @@ const { Routes } = require('discord-api-types/v9');
 const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+const chalk = require('chalk');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
 client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(chalk.keyword("orange")("[BOT] ") + `Logged in as ${client.user.tag}!`);
     registerCommands();
     setBotStatus();
 });
@@ -29,14 +30,14 @@ async function registerCommands() {
 
     try {
         if (verboseLogging == "true") {
-            console.log('Started refreshing application (/) commands.');
+            console.log(chalk.keyword("orange")("[BOT] ") + 'Started refreshing application (/) commands.');
         }
         await rest.put(
             Routes.applicationCommands(client.user.id), 
             { body: commands }
         );
         if (verboseLogging == "true") {
-            console.log('Successfully reloaded application (/) commands.');
+            console.log(chalk.keyword("orange")("[BOT] ") + 'Successfully reloaded application (/) commands.');
         }
     } catch (error) {
         console.error('Error reloading commands:', error);

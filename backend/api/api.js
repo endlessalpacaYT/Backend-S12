@@ -1,18 +1,19 @@
 const express = require('express');
 const User = require('../Models/user.js');
+const chalk = require('chalk');
 
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
-console.log("api started!")
+console.log(chalk.keyword("orange")("[API] ") + "api started!")
 
 app.get('/version', (req, res) => {
     res.send({
-            version: '0.11',
+            version: '0.12',
             backend: 'Backend S12'
             });
     if (verboseLogging == "true") {
-        console.log('Request made to /version');
+        console.log(chalk.keyword("orange")("[API] ") + 'Request made to /version');
     }
   });
 

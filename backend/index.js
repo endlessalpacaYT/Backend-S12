@@ -5,13 +5,14 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 require('dotenv').config();
 const mongoose = require("mongoose");
+const chalk = require('chalk');
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
 if (verboseLogging == "false") {
-    console.log("Verbose Logging: Off");
+    console.log(chalk.keyword("green")("[LOGGING] ") + "Verbose Logging: Off");
 }else {
-    console.log("Verbose Logging Is On (This Is Good For Debugging)");
+    console.log(chalk.keyword("green")("[LOGGING] ") + "Verbose Logging Is On (This Is Good For Debugging)");
 }
 
 express.use(Express.json());
@@ -45,7 +46,7 @@ function delay(ms) {
 
 function startBot() {
     if (verboseLogging == "true") {
-        console.log("Discord Integration Is Starting!");
+        console.log(chalk.keyword("orange")("[BOT] ") + "Discord Integration Is Starting!");
     }
     delay(500);
     require("./discord/index.js");
@@ -54,7 +55,7 @@ function startBot() {
 function startHttpServer() {
     const port = process.env.PORT || 3551;
     express.listen(port, () => {
-        console.log(`Backend S12 Started On 127.0.0.1:${port}`);
+        console.log(chalk.keyword("green")("[BACKEND] ") + `Backend S12 Started On 127.0.0.1:${port}`);
     }).on("error", (err) => {
         if (err.code == "EADDRINUSE") console.log(`\x1b[31mERROR\x1b[0m: Port ${port} is already in use!`);
         else throw err; 
@@ -91,11 +92,11 @@ express.use((req, res, next) => {
 async function initDB() {
     const DB = process.env.DB;
     if (verboseLogging == "true") {
-        console.log("MongoDB Connecting To: " + DB);
+        console.log(chalk.keyword("green")("[DATABASE] ") + "MongoDB Connecting To: " + DB);
     }
     try {
         await mongoose.connect(DB);
-        console.log("MongoDB Connected To: " + DB);
+        console.log(chalk.keyword("green")("[DATABASE] ") + "MongoDB Connected To: " + DB);
 
         const testSchema = new mongoose.Schema({
             username: { type: String, required: true }
@@ -109,7 +110,7 @@ async function initDB() {
 
         const savedDoc = await testDoc.save();
         if (verboseLogging == "true") {
-            console.log("Test Document Saved: ", savedDoc);
+            console.log(chalk.keyword("green")("[DATABASE] ") + "Test Document Saved: ", savedDoc);
         }
 
     } catch (err) {
@@ -121,7 +122,7 @@ async function initDB() {
 I want to create a way to restart backend in future using frontend so this might come in handy*/
 
 function startBackend() {
-    console.log("Starting Backend!");
+    console.log(chalk.keyword("purple")("[BACKEND] ") + "Starting Backend!");
     startHttpServer();
     initDB();
     require("./xmpp/xmpp.js");

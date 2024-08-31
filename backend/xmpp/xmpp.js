@@ -1,13 +1,14 @@
 const WebSocket = require("ws").Server;
 const XMLBuilder = require("xmlbuilder");
 const XMLParser = require("xml-parser");
+const chalk = require('chalk');
 
 const functions = require("../structure/functions.js");
 const matchmaker = require("../matchmaker/matchmaker.js");
 
 const port = 80;
 
-const wss = new WebSocket({ port: port }, () => console.log("XMPP and Matchmaker started listening on port", port));
+const wss = new WebSocket({ port: port }, () => console.log(chalk.keyword("orange")("[XMPP] ") + "XMPP and Matchmaker started listening on port", port));
 wss.on("error", (err) => {
     console.log("XMPP and Matchmaker \x1b[31mFAILED\x1b[0m to start hosting.");
 })
