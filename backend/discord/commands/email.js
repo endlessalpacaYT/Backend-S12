@@ -8,8 +8,8 @@ const verboseLogging = process.env.VERBOSE_LOGGING;
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("password")
-        .setDescription("Change your account password.")
+        .setName("email")
+        .setDescription("Change your account email.")
         .addStringOption(option =>
             option.setName("email")
                 .setDescription("Your desired email.")
