@@ -58,7 +58,7 @@ function startHttpServer() {
 }
 
 try {
-    if (!fs.existsSync(path.join(process.env.LOCALAPPDATA, "LawinServer"))) fs.mkdirSync(path.join(process.env.LOCALAPPDATA, "LawinServer"));
+    if (!fs.existsSync(path.join(process.env.LOCALAPPDATA, "BackendS12"))) fs.mkdirSync(path.join(process.env.LOCALAPPDATA, "BackendS12"));
 } catch (err) {
     // fallback
     if (!fs.existsSync(path.join(__dirname, "ClientSettings"))) fs.mkdirSync(path.join(__dirname, "ClientSettings"));
@@ -66,7 +66,7 @@ try {
 
 // if endpoint not found, return this error
 express.use((req, res, next) => {
-    var XEpicErrorName = "errors.com.lawinserver.common.not_found";
+    var XEpicErrorName = "errors.com.epicgames.common.not_found";
     var XEpicErrorCode = 1004;
 
     res.set({
