@@ -68,7 +68,7 @@ module.exports = {
                 .setTitle("Successfully Registered")
                 .setDescription("Registered With The Username: " + username);
 
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed], ephemeral: true });
 
             if (verboseLogging === "true") {
                 console.log("User: " + userId + " Has Registered With The Username: " + username);
