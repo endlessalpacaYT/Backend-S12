@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../Models/user.js)
+const User = require('../Models/user.js');
 
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
