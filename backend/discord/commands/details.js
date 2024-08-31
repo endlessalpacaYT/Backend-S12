@@ -28,7 +28,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
                 .setTitle("User Details")
-                .setDescription("User details for: " + username);
+                .setDescription("User details for: " + username)
                 .addFields([
                   {
                     name: "Username",
