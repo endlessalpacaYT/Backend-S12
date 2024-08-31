@@ -25,7 +25,10 @@ express.use(require("./structure/lightswitch.js"));
 express.use(require("./structure/affiliate.js"));
 express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
-express.use(require("./routes/mcp.js"));
+
+fs.readdirSync("./routes").forEach(fileName => {
+    app.use(require(`./routes/${fileName}`));
+});
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
