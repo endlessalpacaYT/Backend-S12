@@ -13,7 +13,7 @@ module.exports = {
 
     async execute(interaction) {
         try {
-            const user = await User.findOne({ discordId: userId });
+            const user = await User.findOne({ discordId: interaction.userId });
 
             if (!user) {
                 const embed = new EmbedBuilder()
