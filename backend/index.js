@@ -27,7 +27,7 @@ express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
 
 fs.readdirSync("./routes").forEach(fileName => {
-    app.use(require(`./routes/${fileName}`));
+    express.use(require(`./routes/${fileName}`));
 });
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
