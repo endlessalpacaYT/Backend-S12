@@ -20,33 +20,10 @@ module.exports = {
                 const username = user.username;
 
                 if (user) {
-            const embed = new EmbedBuilder()
-                .setColor("#a600ff")
-                .setTitle("User Details")
-                .setDescription("User details for: " + username)
-                .addFields([
-                  {
-                    name: "Username",
-                    value: user.username,
-                    inline: true
-                  },
-                  {
-                    name: "Email",
-                    value: user.email,
-                    inline: true
-                  },
-                  {
-                    name: "User ID",
-                    value: user.accountId,
-                    inline: true
-                  },
-                  {
-                    name: "Email",
-                    value: user.email,
-                    inline: true
-                  },
-                  ])
-                  .setTimestamp();
+                    const embed = new EmbedBuilder()
+                        .setColor("#a600ff")
+                        .setTitle("You Have An Account!")
+                        .setDescription(`You Have An Account With DiscordID: ${userId} With Username: ${username}`);
 
                     await interaction.reply({ embeds: [embed], ephemeral: true });
                     return;
