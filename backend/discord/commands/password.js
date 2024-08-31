@@ -52,7 +52,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed], ephemeral: true });
 
             if (verboseLogging === "true") {
-                console.log("User: " + username + " has changed their password.");
+                console.log("User: " + userId + " has changed their password.");
             }
         } catch (error) {
             console.error('Error registering user:', error);
