@@ -25,7 +25,7 @@ express.use(require("./structure/lightswitch.js"));
 express.use(require("./structure/affiliate.js"));
 express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
-express.use(require("./mcp/mcp.js"));
+express.use(require("./routes/mcp.js"));
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
