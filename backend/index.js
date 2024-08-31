@@ -6,6 +6,14 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config();
 const mongoose = require("mongoose");
 
+const verboseLogging = process.env.VERBOSE_LOGGING;
+
+if (verboseLogging == "false") {
+    console.log("Verbose Logging: Off");
+}else {
+    console.log("Verbose Logging Is On (This Is Good For Debugging)");
+}
+
 express.use(Express.json());
 express.use(Express.urlencoded({ extended: true }));
 express.use(Express.static('public'));
@@ -25,18 +33,11 @@ express.use(require("./structure/lightswitch.js"));
 express.use(require("./structure/affiliate.js"));
 express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
+express.use(require("./api/api.js"));
 
 fs.readdirSync("./routes").forEach(fileName => {
     express.use(require(`./routes/${fileName}`));
 });
-
-const verboseLogging = process.env.VERBOSE_LOGGING;
-
-if (verboseLogging == "false") {
-    console.log("Verbose Logging: Off");
-}else {
-    console.log("Verbose Logging Is On (This Is Good For Debugging)");
-}
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -128,4 +129,4 @@ function startBackend() {
     startBot();
 }
 
-startBackend()
+startBackend();

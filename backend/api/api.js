@@ -4,9 +4,13 @@ const User = require('../Models/user.js');
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
+console.log("api started!")
 
 app.get('/version', (req, res) => {
-    res.send({ version: '0.1'});
+    res.send({
+            version: '0.11',
+            backend: 'Backend S12'
+            });
     if (verboseLogging == "true") {
         console.log('Request made to /version');
     }
@@ -41,3 +45,5 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error.' });
     }
 });
+
+module.exports = app;
