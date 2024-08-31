@@ -42,7 +42,7 @@ module.exports = {
             }
 
           const hashedPassword = await bcrypt.hash(password, 10);
-          await user.updateOne({ $set: { password: hashedPassword } });
+          await existingUser.updateOne({ $set: { password: hashedPassword } });
 
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
