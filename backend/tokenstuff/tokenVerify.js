@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../Models/user.js");
 const functions = require("../structure/functions.js");
-// const error = require("../structs/error.js");
+const error = require("../strucures/error.js");
 
 async function verifyToken(req, res, next) {
     let authErr = () => error.createError(
