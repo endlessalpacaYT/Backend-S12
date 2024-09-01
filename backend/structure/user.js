@@ -6,7 +6,6 @@ const iniparser = require("ini");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../Models/user.js");
-var Memory_CurrentAccountID = config.Config.displayName;
 
 express.get("/account/api/public/account", async (req, res) => {
     var response = [];
