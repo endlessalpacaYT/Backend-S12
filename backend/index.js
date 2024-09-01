@@ -43,6 +43,18 @@ fs.readdirSync("./routes").forEach(fileName => {
 });
 
 const tokens = JSON.parse(fs.readFileSync("./tokenstuff/tokens.json").toString());
+for (let tokenType in tokens) {
+    for (let tokenIndex in tokens[tokenType]) {
+        let decodedToken = jwt.decode(tokens[tokenType][tokenIndex].token.replace("eg1~", ""));
+
+        if (DateAddHours(new Date(decodedToken.creation_date), decodedToken.hours_expire).getTime() <= new Date().getTime()) {
+            tokens[tokenType].splice(Number(tokenIndex), 1);
+        }
+    }
+}
+
+fs.writeFileSync("./tokenstuff/tokens.json", JSON.stringify(tokens, null, 2));
+
 global.accessTokens = tokens.accessTokens;
 global.refreshTokens = tokens.refreshTokens;
 global.clientTokens = tokens.clientTokens;
