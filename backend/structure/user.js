@@ -3,7 +3,9 @@ const express = Express.Router();
 const fs = require("fs");
 const path = require("path");
 const iniparser = require("ini");
-const config = iniparser.parse(fs.readFileSync(path.join(__dirname, "..", "Config", "config.ini")).toString());
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const User = require("../Models/user.js");
 var Memory_CurrentAccountID = config.Config.displayName;
 
 express.get("/account/api/public/account", async (req, res) => {
