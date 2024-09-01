@@ -6,8 +6,10 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config();
 const mongoose = require("mongoose");
 const chalk = require('chalk');
+const functions = require('./structure/functions.js');
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
+global.JWT_SECRET = functions.MakeID();
 
 if (verboseLogging == "false") {
     console.log(chalk.keyword("green")("[LOGGING] ") + "Verbose Logging: Off");
@@ -39,6 +41,12 @@ express.use(require("./api/api.js"));
 fs.readdirSync("./routes").forEach(fileName => {
     express.use(require(`./routes/${fileName}`));
 });
+
+const tokens = JSON.parse(fs.readFileSync("./tokenstuff/tokens.json").toString());
+global.accessTokens = tokens.accessTokens;
+global.refreshTokens = tokens.refreshTokens;
+global.clientTokens = tokens.clientTokens;
+
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
