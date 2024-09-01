@@ -13,11 +13,19 @@ module.exports = {
 
             const backendVersionInfo = response.data.version; 
             const backendName = response.data.backend;
+            const versionDate = response.data.versionDate;
+            const environment = response.data.environment;
+            const uptime = response.data.uptime;
 
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
                 .setTitle(backendName)
-                .setDescription("Version Is: " + backendVersionInfo);
+                .setDescription(
+                    "Version: " + backendVersionInfo + "\n" +
+                    "Version-Date: " + versionDate + "\n" +
+                    "Environment: " + environment + "\n" +
+                    "Uptime: " + uptime
+                );
 
             await interaction.reply({ embeds: [embed] });
 

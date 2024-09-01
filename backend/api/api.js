@@ -10,7 +10,10 @@ console.log(chalk.keyword("orange")("[API] ") + "api started!")
 app.get('/version', (req, res) => {
     res.send({
             version: '0.12',
-            backend: 'Backend S12'
+            versionDate: '01/09/2024',
+            backend: 'Backend S12',
+            environment: process.env.ENVIRONMENT || "Prod",
+            uptime: process.uptime()
             });
     if (verboseLogging == "true") {
         console.log(chalk.keyword("orange")("[API] ") + 'Request made to /version');
