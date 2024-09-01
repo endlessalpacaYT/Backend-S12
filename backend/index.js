@@ -34,6 +34,7 @@ express.use(require("./structure/lightswitch.js"));
 express.use(require("./structure/affiliate.js"));
 express.use(require("./matchmaker/matchmaking.js"));
 express.use(require("./structure/cloudstorage.js"));
+express.use(require("./routes/user.js"));
 express.use(require("./api/api.js"));
 
 fs.readdirSync("./routes").forEach(fileName => {
