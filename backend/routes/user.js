@@ -35,3 +35,5 @@ app.get("/account/api/public/account", async (req, res) => {
 });
 
 module.exports = app;
+
+//god damn i dont know what i am doing ughhhhh!!!
