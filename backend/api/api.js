@@ -20,6 +20,16 @@ app.get('/version', (req, res) => {
     }
   });
 
+app.get('/launcher/version', (req, res) => {
+    res.send({
+            version: '0.1',
+            versionDate: '01/09/2024'
+            });
+    if (verboseLogging == "true") {
+        console.log(chalk.keyword("orange")("[API] ") + 'Request made to /launcher/version');
+    }
+  });
+
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -43,7 +53,7 @@ app.post('/login', async (req, res) => {
         }
     } catch (error) {
         if (verboseLogging == "true") {
-            console.error('Error during login of user ', user.username, ':', error);
+            console.log(chalk.keyword("red")("[API] ") + 'Error during login of user ', user.username, ':', error);
         }
         
         res.status(500).json({ success: false, message: 'Internal Server Error.' });
