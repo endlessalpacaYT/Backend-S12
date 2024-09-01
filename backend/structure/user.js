@@ -6,6 +6,9 @@ const iniparser = require("ini");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../Models/user.js");
+const tokenCreation = require("../tokenstuff/tokenCreation.js");
+const { verifyToken, verifyClient } = require("../tokenstuff/tokenVerify.js");
+
 
 express.get("/account/api/public/account", async (req, res) => {
     var response = [];
@@ -153,7 +156,9 @@ express.post("/account/api/oauth/token", async (req, res) => {
     }
 
     if (Memory_CurrentAccountID.includes("@")) Memory_CurrentAccountID = Memory_CurrentAccountID.split("@")[0];
+    
 
+    
     res.json({
         "access_token": "lawinstokenlol",
         "expires_in": 28800,
