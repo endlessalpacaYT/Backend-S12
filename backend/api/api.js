@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
-console.log(chalk.keyword("orange")("[API] ") + "api started!")
+console.log(chalk.keyword("orange")("[API] ") + "API started!")
 
 app.get('/version', (req, res) => {
     res.send({
@@ -53,7 +53,7 @@ app.post('/login', async (req, res) => {
         }
     } catch (error) {
         if (verboseLogging == "true") {
-            console.log(chalk.keyword("red")("[API] ") + 'Error during login of user ', user.username, ':', error);
+            console.log(chalk.keyword("red")("[ERROR] ") + 'Error during login of user ', user.username, ':', error);
         }
         
         res.status(500).json({ success: false, message: 'Internal Server Error.' });
