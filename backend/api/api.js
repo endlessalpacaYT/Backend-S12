@@ -9,7 +9,7 @@ console.log(chalk.keyword("orange")("[API] ") + "API started!")
 
 app.get('/version', (req, res) => {
     res.send({
-            version: '0.13',
+            version: '0.14',
             versionDate: '01/09/2024',
             backend: 'Backend S12',
             environment: process.env.ENVIRONMENT || "Prod",
