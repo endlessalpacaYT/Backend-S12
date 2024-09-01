@@ -3,3 +3,5 @@ BOT_TOKEN=
 DB=mongodb://127.0.0.1:27017/BackendS12
 VERBOSE_LOGGING=false
 ENVIRONMENT=Production
+GS_IP=
+GS_PORT=
