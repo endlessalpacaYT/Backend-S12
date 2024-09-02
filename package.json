@@ -20,8 +20,7 @@
     "uuid": "^8.3.2",
     "ws": "^8.5.0",
     "xml-parser": "^1.2.1",
-    "xmlbuilder": "^15.1.1",
-    
+    "xmlbuilder": "^15.1.1"
   },
   "scripts": {
     "start": "node index.js",
