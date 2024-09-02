@@ -19,11 +19,6 @@ module.exports = {
         const password = interaction.options.getString('password');
         const userId = interaction.user.id;
 
-        function generateAccountId() {
-            const uuid = uuidv4();
-            const accountId = uuid.replace(/-/g, '').substring(0, 32);
-            return accountId.toUpperCase();
-        }
 
         
 
