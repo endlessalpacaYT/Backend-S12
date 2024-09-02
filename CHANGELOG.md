@@ -1,7 +1,7 @@
 ## Changelog
-#### Last Updated: 02/09/24 at 1pm
+#### Last Updated: 02/09/24
 
-#### v0.13.1
+#### __v0.13.1__
 - Fixed API
 - Added Username Command
 - Added launcher version route
