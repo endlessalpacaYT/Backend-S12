@@ -19,11 +19,6 @@ module.exports = {
         const email = interaction.options.getString('email');
         const userId = interaction.user.id;
 
-        function generateAccountId() {
-            const uuid = uuidv4();
-            const accountId = uuid.replace(/-/g, '').substring(0, 32);
-            return accountId.toUpperCase();
-        }
 
         
 
