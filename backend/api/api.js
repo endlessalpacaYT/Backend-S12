@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../Models/user.js');
 const chalk = require('chalk');
-const bcrypt = require('bcrypt');
+
 
 const app = express();
 const verboseLogging = process.env.VERBOSE_LOGGING;
