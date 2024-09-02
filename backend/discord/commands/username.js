@@ -11,12 +11,12 @@ module.exports = {
         .setName("username")
         .setDescription("Change your ingame username.")
         .addStringOption(option =>
-            option.setName("email")
+            option.setName("username")
                 .setDescription("Your desired username.")
                 .setRequired(true)),
 
     async execute(interaction) {
-        const email = interaction.options.getString('username');
+        const username = interaction.options.getString('username');
         const userId = interaction.user.id;
 
 
@@ -41,10 +41,10 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
                 .setTitle("Successfully changed username")
-                .setDescription("You have successfully changed your username);
+                .setDescription("You have successfully changed your username");
             await interaction.reply({ embeds: [embed], ephemeral: true });
             if (verboseLogging === "true") {
-                console.log("User: " + userId + " has changed their email.");
+                console.log("User: " + userId + " has changed their username.");
             }
         } catch (error) {
             console.error('Error changing email:', error);
