@@ -3,7 +3,6 @@ const express = Express.Router();
 const fs = require("fs");
 const path = require("path");
 const iniparser = require("ini");
-const config = iniparser.parse(fs.readFileSync(path.join(__dirname, "..", "Config", "config.ini")).toString());
 const functions = require("../structure/functions.js");
 
 express.get("/fortnite/api/matchmaking/session/findPlayer/*", async (req, res) => {
@@ -37,8 +36,8 @@ express.get("/fortnite/api/matchmaking/session/:session_id", async (req, res) =>
         "ownerId": functions.MakeID().replace(/-/ig, "").toUpperCase(),
         "ownerName": "[DS]fortnite-liveeugcec1c2e30ubrcore0a-z8hj-1968",
         "serverName": "[DS]fortnite-liveeugcec1c2e30ubrcore0a-z8hj-1968",
-        "serverAddress": config.GameServer.ip,
-        "serverPort": Number(config.GameServer.port),
+        "serverAddress": process.env.GS_IP,
+        "serverPort": process.env.GS_PORT,
         "maxPublicPlayers": 220,
         "openPublicPlayers": 175,
         "maxPrivatePlayers": 0,
