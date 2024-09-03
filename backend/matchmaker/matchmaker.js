@@ -1,6 +1,7 @@
 const functions = require("../structure/functions.js");
 
-module.exports = async (ws) => {
+
+module.exports = async (wss) => {
   // create hashes
   const ticketId = functions.MakeID().replace(/-/gi, "");
   const matchId = functions.MakeID().replace(/-/gi, "");
@@ -17,7 +18,7 @@ module.exports = async (ws) => {
   Join();
 
   function Connecting() {
-    ws.send(
+    wss.send(
       JSON.stringify({
         payload: {
           state: "Connecting",
@@ -28,7 +29,7 @@ module.exports = async (ws) => {
   }
 
   function Waiting() {
-    ws.send(
+    wss.send(
       JSON.stringify({
         payload: {
           totalPlayers: 1,
@@ -41,7 +42,7 @@ module.exports = async (ws) => {
   }
 
   function Queued() {
-    ws.send(
+    wss.send(
       JSON.stringify({
         payload: {
           ticketId: ticketId,
@@ -56,7 +57,7 @@ module.exports = async (ws) => {
   }
 
   function SessionAssignment() {
-    ws.send(
+    wss.send(
       JSON.stringify({
         payload: {
           matchId: matchId,
@@ -68,7 +69,7 @@ module.exports = async (ws) => {
   }
 
   function Join() {
-    ws.send(
+    wss.send(
       JSON.stringify({
         payload: {
           matchId: matchId,
