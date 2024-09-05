@@ -1,7 +1,7 @@
 ## Changelog
 #### Last Updated: 05/09/24
 
-### v0.13.12
+#### v0.13.12
 - Fixed update API giving errors because of bad connection
 
 #### v0.13.11
