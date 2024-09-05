@@ -1,5 +1,9 @@
 ## Changelog
-#### Last Updated: 02/09/24
+#### Last Updated: 05/09/24
+
+#### v0.13.11
+- Added Update API
+- Added Update Command
 
 #### v0.13.1
 - Fixed API
