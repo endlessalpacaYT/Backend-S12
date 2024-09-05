@@ -1,6 +1,9 @@
 ## Changelog
 #### Last Updated: 05/09/24
 
+#### v0.13.14
+- Added env for external API
+
 #### v0.13.13
 - added non functional button to the update command!!!
 - api got variables for the response, ready for an env
