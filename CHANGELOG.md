@@ -2,6 +2,9 @@
 #### Last Updated: 05/09/24
 
 #### v0.13.14
+- Started on frontend!
+
+#### v0.13.14
 - Added env for external API
 
 #### v0.13.13
