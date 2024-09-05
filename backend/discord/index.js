@@ -69,4 +69,20 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isButton()) return;
+
+    try {
+        if (interaction.customId === 'downloadUpdate') {
+            await interaction.deferUpdate();
+            
+            await interaction.followUp(
+                { content: 'This feature is not available right now!', ephemeral: true }
+            );
+        }
+    } catch (error) {
+        console.error("Error during button interaction:", error);
+    }
+});
+
 client.login(process.env.BOT_TOKEN);

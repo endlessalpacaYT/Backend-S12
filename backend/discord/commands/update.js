@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
@@ -56,7 +57,15 @@ module.exports = {
                 .setTitle("Update Status!")
                 .setDescription("There is an update!");
 
-                await interaction.reply({ embeds: [embed] });
+                const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('downloadUpdate')
+                        .setLabel('Download Update')
+                        .setStyle(ButtonStyle.Primary)
+                );
+
+                await interaction.reply({ embeds: [embed], components: [row] });
             } else {
                 const embed = new EmbedBuilder()
                 .setColor("#ff0000")
