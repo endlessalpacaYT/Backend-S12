@@ -8,3 +8,5 @@ Backend-S12 is a fortnite backend written in Node.js that features an account sy
 #### NOTICE
 
 If you have updated to this version from a previous version, please use the install_packages.bat file to add the new packages.
+
+Please make sure that you start the update api, it most likely wont cause issues if you dont however it is reccomended!

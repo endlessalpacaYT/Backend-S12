@@ -6,7 +6,7 @@ const port = 5555;
 
 app.get("/api/currentversion", (req, res) => {
     res.send({
-        version: '0.13.11',
+        version: '0.13.12',
         versionDate: '05/09/2024',
         backend: 'Backend S12',
         path: "../"

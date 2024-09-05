@@ -9,11 +9,32 @@ module.exports = {
 
     async execute(interaction) {
         try {
-            let response = await axios.get("http://" + process.env.UPDATE_API_IP + ":" + process.env.UPDATE_API_PORT + "/api/currentversion");
+            let newBackendVersionInfo;
+            let newBackendName;
+            let newVersionDate;
 
-            const newBackendVersionInfo = response.data.version; 
-            const newBackendName = response.data.backend;
-            const newVersionDate = response.data.versionDate;
+            try {
+                let response = await axios.get("http://" + process.env.UPDATE_API_IP + ":" + process.env.UPDATE_API_PORT + "/api/currentversion");
+
+                newBackendVersionInfo = response.data.version; 
+                newBackendName = response.data.backend;
+                newVersionDate = response.data.versionDate;
+            } 
+            catch {
+                console.log("[ERROR] Could not connect to update API, Reverting to Preset Configuration!");
+
+                try {
+                    let response = await axios.get("http://update.pongodev.com:5555/api/currentversion");
+
+                    newBackendVersionInfo = response.data.version; 
+                    newBackendName = response.data.backend;
+                    newVersionDate = response.data.versionDate;
+                } catch (error) {
+                    console.log("[ERROR] Could not connect to the preset update API either!");
+                    await interaction.reply({ content: 'Unable to check for updates. Please try again later.', ephemeral: true });
+                    return;
+                }
+            }
 
             response = await axios.get("http://127.0.0.1:3551/version");
 
