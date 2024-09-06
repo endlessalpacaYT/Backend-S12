@@ -10,6 +10,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 const verboseLogging = process.env.VERBOSE_LOGGING;
 
+// TODO: add ban command, make sure it can only be used by admins.
+
 client.once('ready', () => {
     console.log(chalk.keyword("orange")("[BOT] ") + `Logged in as ${client.user.tag}!`);
     registerCommands();
